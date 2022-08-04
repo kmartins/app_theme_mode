@@ -291,10 +291,11 @@ void main() {
         var callOnChange = 0;
         final cloneThemeModeData = themeModeData.copyWith(
           themeMode: ThemeMode.system,
-          onChangeThemeMode: (_) => ++callOnChange,
+          setThemeMode: (_) => ++callOnChange,
         )..useDarkMode();
         expect(cloneThemeModeData.themeMode, ThemeMode.system);
         expect(callOnChange, 1);
+        expect(cloneThemeModeData.copyWith().themeMode, ThemeMode.system);
       });
 
       test('use system mode', () {

@@ -40,11 +40,11 @@ class ThemeModeData {
   /// Create a new [ThemeModeData] based in other.
   ThemeModeData copyWith({
     ThemeMode? themeMode,
-    OnChangeThemeMode? onChangeThemeMode,
+    OnChangeThemeMode? setThemeMode,
   }) {
     return ThemeModeData(
       themeMode: themeMode ?? this.themeMode,
-      setThemeMode: onChangeThemeMode ?? setThemeMode,
+      setThemeMode: setThemeMode ?? this.setThemeMode,
     );
   }
 
