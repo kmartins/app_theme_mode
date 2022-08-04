@@ -235,6 +235,25 @@ void main() {
       expect(find.text(ThemeMode.light.name), findsOneWidget);
     });
 
+    testWidgets(
+      'should throw FlutterError if AppThemeMode '
+      'is not contained in current context',
+      (tester) async {
+        const expectedFlutterErrorMessage = '''
+        AppThemeMode.of() called with a context that does not contain a AppThemeMode.
+        This can happen if the context you used comes from a widget above the AppThemeMode.
+        The context used was: ShowThemeMode(dirty)
+''';
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: ShowThemeMode(),
+          ),
+        );
+        final flutterError = await tester.takeException() as FlutterError;
+        expect(flutterError.message, expectedFlutterErrorMessage);
+      },
+    );
+
     group('ThemeModeData', () {
       // ignore: prefer_function_declarations_over_variables
       final onChangeThemeMode = (_) {};
@@ -272,10 +291,11 @@ void main() {
         var callOnChange = 0;
         final cloneThemeModeData = themeModeData.copyWith(
           themeMode: ThemeMode.system,
-          onChangeThemeMode: (_) => ++callOnChange,
+          setThemeMode: (_) => ++callOnChange,
         )..useDarkMode();
         expect(cloneThemeModeData.themeMode, ThemeMode.system);
         expect(callOnChange, 1);
+        expect(cloneThemeModeData.copyWith().themeMode, ThemeMode.system);
       });
 
       test('use system mode', () {
