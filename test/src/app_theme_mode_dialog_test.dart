@@ -182,5 +182,39 @@ void main() {
       );
       expect(materialApp.themeMode, ThemeMode.system);
     });
+
+    testWidgets(
+        'should be close dialog and change theme when '
+        'the theme mode selected is different through the radio widget',
+        (tester) async {
+      await tester.pumpWidget(themeModeDialog);
+
+      await tester.tap(find.text('Theme Mode Dialog'));
+      await tester.pump();
+
+      final radios =
+          find.byWidgetPredicate((widget) => widget is Radio<ThemeMode>);
+      final lightRadio = radios.at(1);
+      final darkRadio = radios.last;
+
+      await tester.tap(darkRadio);
+      await tester.pump();
+
+      var materialApp = tester.widget<MaterialApp>(
+        find.byType(MaterialApp),
+      );
+      expect(materialApp.themeMode, ThemeMode.dark);
+
+      await tester.tap(find.text('Theme Mode Dialog'));
+      await tester.pump();
+
+      await tester.tap(lightRadio);
+      await tester.pump();
+
+      materialApp = tester.widget<MaterialApp>(
+        find.byType(MaterialApp),
+      );
+      expect(materialApp.themeMode, ThemeMode.light);
+    });
   });
 }
