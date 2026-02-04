@@ -70,7 +70,7 @@ class LabeledRadio<T> extends StatelessWidget {
               groupValue: groupValue,
               value: value,
               onChanged: (value) {
-                if (value != null) {
+                if (value case final value?) {
                   onChanged(value);
                 }
               },

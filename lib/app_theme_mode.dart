@@ -1,3 +1,4 @@
+/// Library for app_theme_mode
 library app_theme_mode;
 
 export 'src/app_theme_mode.dart';

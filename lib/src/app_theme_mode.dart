@@ -15,7 +15,7 @@ typedef ThemeModeBuilder = Widget Function(
 /// {@endtemplate}
 @immutable
 @visibleForTesting
-class ThemeModeData {
+final class ThemeModeData {
   /// {@macro theme_mode_data}
   const ThemeModeData({
     required this.themeMode,
@@ -89,9 +89,8 @@ class AppThemeMode extends StatefulWidget {
 
   /// Gets the [ThemeModeData].
   static ThemeModeData of(BuildContext context) {
-    final inheritedThemeMode =
-        context.dependOnInheritedWidgetOfExactType<_InheritedThemeModeData>();
-    if (inheritedThemeMode != null) {
+    if (context.dependOnInheritedWidgetOfExactType<_InheritedThemeModeData>()
+        case final inheritedThemeMode?) {
       return inheritedThemeMode.themeModeData;
     }
     throw FlutterError(
