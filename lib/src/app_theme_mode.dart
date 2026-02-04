@@ -58,7 +58,7 @@ final class ThemeModeData {
   }
 
   @override
-  int get hashCode => Object.hashAll([themeMode, setThemeMode]);
+  int get hashCode => Object.hash(themeMode, setThemeMode);
 }
 
 /// {@template app_theme_mode}
