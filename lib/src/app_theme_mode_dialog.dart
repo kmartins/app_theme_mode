@@ -66,7 +66,7 @@ class AppThemeModeDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text((cancelTitle ?? 'Cancel').toUpperCase()),
+          child: Text(cancelTitle?.toUpperCase() ?? 'CANCEL'),
         ),
       ],
       content: RadioGroup<ThemeMode>(
