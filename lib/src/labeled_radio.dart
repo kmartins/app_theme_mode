@@ -67,8 +67,10 @@ class LabeledRadio<T> extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Radio<T>(
+              // ignore: deprecated_member_use
               groupValue: groupValue,
               value: value,
+              // ignore: deprecated_member_use
               onChanged: (value) {
                 if (value case final value?) {
                   onChanged(value);
