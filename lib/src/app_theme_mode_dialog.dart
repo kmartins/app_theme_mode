@@ -60,7 +60,16 @@ class AppThemeModeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = AppThemeMode.of(context).themeMode;
+    final themeModeData = AppThemeMode.of(context);
+    final currentTheme = themeModeData.themeMode;
+    final setThemeMode = themeModeData.setThemeMode;
+
+    /// Change Theme Mode and close dialog.
+    void changeThemeMode(ThemeMode themeMode) {
+      setThemeMode(themeMode);
+      Navigator.pop(context);
+    }
+
     return AlertDialog(
       title: Text(title ?? 'Select a theme'),
       actions: [
@@ -71,37 +80,31 @@ class AppThemeModeDialog extends StatelessWidget {
       ],
       content: RadioGroup<ThemeMode>(
         groupValue: currentTheme,
-        onChanged: (theme) => _changeThemeMode(context, theme!),
+        onChanged: (theme) => changeThemeMode(theme!),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             LabeledRadio<ThemeMode>(
               value: ThemeMode.system,
               groupValue: currentTheme,
-              onChanged: (theme) => _changeThemeMode(context, theme),
+              onChanged: changeThemeMode,
               label: systemThemeTitle ?? 'System',
             ),
             LabeledRadio<ThemeMode>(
               value: ThemeMode.light,
               groupValue: currentTheme,
-              onChanged: (theme) => _changeThemeMode(context, theme),
+              onChanged: changeThemeMode,
               label: lightThemeTitle ?? 'Light',
             ),
             LabeledRadio<ThemeMode>(
               value: ThemeMode.dark,
               groupValue: currentTheme,
-              onChanged: (theme) => _changeThemeMode(context, theme),
+              onChanged: changeThemeMode,
               label: darkThemeTitle ?? 'Dark',
             ),
           ],
         ),
       ),
     );
-  }
-
-  /// Change Theme Mode and close dialog.
-  void _changeThemeMode(BuildContext context, ThemeMode themeMode) {
-    AppThemeMode.of(context).setThemeMode(themeMode);
-    Navigator.pop(context);
   }
 }
