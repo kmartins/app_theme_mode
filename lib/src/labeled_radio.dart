@@ -67,13 +67,7 @@ class LabeledRadio<T> extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Radio<T>(
-              groupValue: groupValue,
               value: value,
-              onChanged: (value) {
-                if (value != null) {
-                  onChanged(value);
-                }
-              },
             ),
             Text(label),
           ],

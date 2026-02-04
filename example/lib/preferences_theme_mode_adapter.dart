@@ -17,12 +17,10 @@ class PreferencesThemeModeAdapter extends ThemeModeAdapter {
   final ThemeMode _defaultThemeMode;
 
   @override
-  ThemeMode read() {
-    final themeModeName = sharedPreferences.getString(_key);
-    return themeModeName == null
-        ? _defaultThemeMode
-        : ThemeMode.values.byName(themeModeName);
-  }
+  ThemeMode read() => switch (sharedPreferences.getString(_key)) {
+        null => _defaultThemeMode,
+        final themeModeName => ThemeMode.values.byName(themeModeName),
+      };
 
   @override
   FutureOr<void> write(ThemeMode themeMode) =>

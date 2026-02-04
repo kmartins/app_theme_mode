@@ -22,7 +22,7 @@ jobs:
         run: flutter packages get
 
       - name: Check format
-        run: flutter format --set-exit-if-changed lib test example
+        run: dart format --set-exit-if-changed lib test example
 
       - name: Analyze
         run: flutter analyze lib test example
@@ -37,5 +37,6 @@ jobs:
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        continue-on-error: true
         with:
           fail_ci_if_error: true

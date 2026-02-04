@@ -69,28 +69,32 @@ class AppThemeModeDialog extends StatelessWidget {
           child: Text((cancelTitle ?? 'Cancel').toUpperCase()),
         ),
       ],
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          LabeledRadio<ThemeMode>(
-            value: ThemeMode.system,
-            groupValue: currentTheme,
-            onChanged: (theme) => _changeThemeMode(context, theme),
-            label: systemThemeTitle ?? 'System',
-          ),
-          LabeledRadio<ThemeMode>(
-            value: ThemeMode.light,
-            groupValue: currentTheme,
-            onChanged: (theme) => _changeThemeMode(context, theme),
-            label: lightThemeTitle ?? 'Light',
-          ),
-          LabeledRadio<ThemeMode>(
-            value: ThemeMode.dark,
-            groupValue: currentTheme,
-            onChanged: (theme) => _changeThemeMode(context, theme),
-            label: darkThemeTitle ?? 'Dark',
-          ),
-        ],
+      content: RadioGroup<ThemeMode>(
+        groupValue: currentTheme,
+        onChanged: (theme) => _changeThemeMode(context, theme!),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            LabeledRadio<ThemeMode>(
+              value: ThemeMode.system,
+              groupValue: currentTheme,
+              onChanged: (theme) => _changeThemeMode(context, theme),
+              label: systemThemeTitle ?? 'System',
+            ),
+            LabeledRadio<ThemeMode>(
+              value: ThemeMode.light,
+              groupValue: currentTheme,
+              onChanged: (theme) => _changeThemeMode(context, theme),
+              label: lightThemeTitle ?? 'Light',
+            ),
+            LabeledRadio<ThemeMode>(
+              value: ThemeMode.dark,
+              groupValue: currentTheme,
+              onChanged: (theme) => _changeThemeMode(context, theme),
+              label: darkThemeTitle ?? 'Dark',
+            ),
+          ],
+        ),
       ),
     );
   }
